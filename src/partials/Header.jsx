@@ -22,7 +22,7 @@ const Header = () => {
   const handleShowNavigation = () => {};
   return (
     <>
-      <div className="print:hidden fixed z-[52] bg-white w-full flex justify-between items-center h-16 border-solid border-b-2 border-primary px-2">
+      <div className="print:hidden fixed z-[52] bg-white w-full flex justify-between items-center h-16 border-solid border-b-2 border-black px-2">
         <div className="flex items-center lg:w-full lg:justify-normal relative z-10">
           <div className="group-hover:opacity-20 flex items-center lg:justify-start lg:min-h-[44px] lg:min-w-[170px] max-h-[44px] max-w-[170px] m-0.5">
             <button

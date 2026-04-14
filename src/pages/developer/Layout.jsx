@@ -9,9 +9,9 @@ const Layout = ({ children, menu = "", submenu = "" }) => {
       {/* Header */}
       <Header />
       {/* Navigation */}
-      <Navigation navigationList={navList} menu={menu} submenu={submenu} />
+      <Navigation navigationList={navList} menu={menu} submenu={navList} />
       {/* Body */}
-      {children}
+      <div className="wrapper">{children}</div>
     </>
   );
 };
