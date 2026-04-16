@@ -4,10 +4,10 @@ require 'Response.php';
 
 function sendResponse($result){
     $response = new Response();
-    $response -> setSuccess(true);
-    $response -> setStatusCode(200);
-    $response -> setData($result);
-    $response -> send();
+    $response->setSuccess(true);
+    $response->setStatusCode(200);
+    $response->setData($result);
+    $response->send();
 }
 function checkDbConnection(){
     try{
@@ -16,12 +16,12 @@ function checkDbConnection(){
     }catch(PDOException $error){
         $response = new Response();
         $error =[];
-        $error =['type'] = "invalid_request_error";
-        $error =['success'] = false;
-        $error =['error'] => "Database connection failed: ";
-        $response -> setSuccess(false);
-        $response -> setData($error);
-        $response -> send();
+        $error['type'] ="invalid_request_error";
+        $error['success'] = false;
+        $error['error'] = "Database connection failed: ";
+        $response->setSuccess(false);
+        $response->setData($error);
+        $response->send();
         exit;
     }
 }
@@ -324,15 +324,7 @@ function getResultData($query)
     return $data;
 }
 
-// send response
-function sendResponse($result)
-{
-    $response = new Response();
-    $response->setSuccess(true);
-    $response->setStatusCode(200);
-    $response->setData($result);
-    $response->send();
-}
+
 
 // forbidden access
 function checkAccess()
@@ -654,16 +646,4 @@ function isEmptyItem($val, $secondVal = '')
 {
     if ($val) return $val;
     return $secondVal;
-}
-function returnError($msg)
-{
-    $response = new Response();
-    $error = [];
-    $response->setSuccess(false);
-    $error["count"] = 0;
-    $error["success"] = false;
-    $error['error'] = $msg;
-    $response->setData($error);
-    $response->send();
-    exit;
 }

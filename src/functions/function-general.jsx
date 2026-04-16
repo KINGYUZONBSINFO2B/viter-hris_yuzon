@@ -1,7 +1,10 @@
+import React from "react";
 export const urlPath = "http://localhost/react-vite/viter-hris";
 export const devApiUrl = urlPath + "/rest";
 export const devNavUrl = "";
 export const apiVersion = "/v1";
+
+export const setTimeZone = "Asia/Manila";
 
 //Roles Variable
 export const urlDeveloper = "developer";
@@ -16,4 +19,46 @@ export const isEmptyItem = (item, x = "") => {
     result = item;
   }
   return result;
+};
+
+export const formatDate = (dateVal, val = "", format = "") => {
+  const formattedDate = val;
+  if (typeof dateVal !== "undefined" && dateVal !== "") {
+    const event = new Date(dateVal);
+    return event.toLocaleString("en", dateOptions(format));
+  }
+  return formattedDate;
+};
+
+export const dateOptions = (format = "") => {
+  let options = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+  if (format == "short-date") {
+    return {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+  }
+  return options;
+};
+export const handleEscape = (handleClose) => {
+  React.useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.keyCode === 27) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  });
+};
+export const GetFocus = (id) => {
+  React.useEffect(() => {
+    const obj = document.getElementById(id);
+    obj.focus();
+  }, []);
 };

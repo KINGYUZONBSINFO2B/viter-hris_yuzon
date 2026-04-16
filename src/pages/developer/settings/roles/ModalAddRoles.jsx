@@ -18,6 +18,7 @@ import {
   InputTextArea,
 } from "../../../../components/form-inputs/FormInputs";
 import ButtonSpinner from "../../../../partials/spinners/ButtonSpinner";
+import MessageError from "../../../../partials/MessageError";
 
 const ModalAddRoles = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -27,7 +28,7 @@ const ModalAddRoles = ({ itemEdit }) => {
     mutationFn: (values) =>
       queryData(
         itemEdit
-          ? `${apiVersion}/controllers/developers/settings/roles/roles.php` //update records
+          ? `${apiVersion}/controllers/developers/settings/roles/roles.php?id=${itemEdit.role_aid}` //update records
           : `${apiVersion}/controllers/developers/settings/roles/roles.php`, //create records
         itemEdit
           ? "put" //put if update records,
@@ -35,7 +36,7 @@ const ModalAddRoles = ({ itemEdit }) => {
         values,
       ),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: "roles" });
+      queryClient.invalidateQueries({ queryKey: ["roles"] });
 
       if (data.success) {
         dispatch(setSuccess(true));
@@ -54,8 +55,9 @@ const ModalAddRoles = ({ itemEdit }) => {
   });
   const initVal = {
     ...itemEdit,
-    role_name: "",
-    role_description: "",
+    role_name: itemEdit ? itemEdit.role_name : "",
+    role_description: itemEdit ? itemEdit.role_description : "",
+    role_name_old: itemEdit ? itemEdit.role_name : "",
   };
   const yupSchema = Yup.object({
     role_name: Yup.string().trim().required(),
@@ -63,6 +65,10 @@ const ModalAddRoles = ({ itemEdit }) => {
   const handleCLose = () => {
     dispatch(setIsAdd(false));
   };
+
+  React.useEffect(() => {
+    dispatch(setError(false));
+  }, []);
   return (
     <>
       <ModalWrapperSide
@@ -88,6 +94,7 @@ const ModalAddRoles = ({ itemEdit }) => {
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values, { setSubmitting, resetForm }) => {
+              dispatch(setError(false));
               mutation.mutate(values);
             }}
           >
@@ -109,9 +116,10 @@ const ModalAddRoles = ({ itemEdit }) => {
                           label="Description"
                           name="role_description"
                           type="text"
-                          disabled={mutation.isPending || !props.dirty}
+                          disabled={mutation.isPending}
                         />
                       </div>
+                      {store.error && <MessageError />}
                     </div>
                     <div className="modal-action">
                       <button

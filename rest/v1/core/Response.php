@@ -27,7 +27,7 @@ class Response{
         // }else{
         //     $this ->_responseData=$this->data;
         // }
-        $this ->_responseData=$this->data;
+        $this->_responseData=$this->_data;
 
         echo json_encode($this -> _responseData);
     }

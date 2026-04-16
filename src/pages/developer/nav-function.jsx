@@ -6,32 +6,32 @@ export const navList = [
   {
     label: "Dashboard",
     icon: <MdDashboard />,
-    menu:"dashboard",
-    path: `${devNavUrl}/dashboard`,
-    submenu:"",
+    menu: "dashboard",
+    path: `${devNavUrl}/${urlDeveloper}/dashboard`,
+    submenu: "",
   },
   {
     label: "Employees",
     icon: <FaUser />,
-    menu:"employees",
-    path: `${devNavUrl}/employees`,
-    submenu:"",
+    menu: "employees",
+    path: `${devNavUrl}/${urlDeveloper}/employees`,
+    submenu: "",
   },
   {
     label: "Settings",
     icon: <FaCogs />,
-    menu:"settings",
-    path: `${devNavUrl}/settings`,
-    submenu:"",
-    subNavList:[
-        {
-            label: "Role",
-            path: `${devNavUrl}/${urlDeveloper}/settings/role`,
-        },
-        {
-            label: "users",
-            path: `${devNavUrl}/${urlDeveloper}/settings/users`,
-        }
-    ]
+    menu: "settings",
+    path: `${devNavUrl}/${urlDeveloper}/settings`,
+    submenu: "",
+    subNavList: [
+      {
+        label: "Role",
+        path: `${devNavUrl}/${urlDeveloper}/settings/role`,
+      },
+      {
+        label: "users",
+        path: `${devNavUrl}/${urlDeveloper}/settings/users`,
+      },
+    ],
   },
 ];
