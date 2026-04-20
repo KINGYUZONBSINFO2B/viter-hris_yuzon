@@ -26,7 +26,7 @@ export const navList = [
     subNavList: [
       {
         label: "Role",
-        path: `${devNavUrl}/${urlDeveloper}/settings/role`,
+        path: `${devNavUrl}/${urlDeveloper}/settings/roles`,
       },
       {
         label: "users",
